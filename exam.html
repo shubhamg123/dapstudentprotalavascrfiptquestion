@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="exam.css">
+</head>
+<body>
+    <div id="popup" style="display:none">
+        <div id="container3">
+            <p >add fields</p>
+            
+            <p>label: <input type="text" id="newinputlabel" class="name" ></p>
+            <p >fieldtype:<select name="options" id="options">
+                <option value="text">text</option>
+                <option value="date">date</option>
+                <option value="integer">integer</option>
+             </select></p>
+            <button id="add" onclick="addnewfield()" style="margin-left:5px;">ADD FIELD</button>
+            <button id="add" onclick="addclasss()">cancel</button>
+       </div>
+   
+
+
+
+    </div>
+   <div id="parent"> 
+       <div id="container">
+     <p >ID CARD form</p>
+     <button id="add1" onclick="addclasss()">ADD NREW  FIELD</button>
+     <p>name: <input type="text" class="name" onkeypress="update()"></p>
+     <p>dob: <input type="date" class="birthday" name="birthday" onkeypress="update(this)"></p>
+     
+     <p>class: <input type="text" class="class" name="class" onkeypress="update(this)"></p>
+     <p>choose photo<input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)"></p>
+</div>
+</div>
+   <div id="parent2">
+
+    <div id="container2">
+  
+            <p >california university</p>
+    
+            <p>name: <input type="text" class="name"></p>
+            <p>dob: <input type="date" class="birthday" name="birthday"></p>
+            <img id="output" width="200"/>	
+            <p>class: <input type="text" class="class" name="class"></p>
+           
+
+
+
+    </div>
+</div>
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
+    <script src="exam.js"></script>
+</body>
+</html>
