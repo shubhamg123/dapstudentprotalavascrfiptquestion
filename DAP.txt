@@ -1,0 +1,620 @@
+/*******************************HTML*********************************/
+<html>
+<head>
+<!-- <script type="text/javascript" src="validateform.js"></script> -->
+<style>
+ul {list-style-type:none;}
+form{
+  background-color: #DCDCDC;
+}
+body
+{
+    background-color: #DCDCDC;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 50%; 
+    height: 50%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+#pre
+{
+    display: grid;
+    width: 30%;
+    height: 40%;
+    margin: 50px auto;
+    border: 2px solid black;
+    border-radius: 30px;
+    
+}
+
+#display-image
+{
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+  
+}
+#column1
+{
+    background-color: aqua;
+    border-radius: 30px;
+}
+
+
+</style>
+</head>
+ 
+<body>
+ 
+<div cellpadding="2" width="20%" bgcolor="99FFFF" align="center"
+cellspacing="2">
+ 
+<ul>
+<li>
+<center><font size=4><b>ID Card Form</b></font></center>
+</li>
+</ul>
+ 
+<ul>
+<li>Name</li>
+<li><input type=text name=textnames id="textname" size="30"></li>
+</ul>
+
+ 
+<ul>
+<li>Date Of Birth</li>
+<li><input type="date" name="date_of_birth" id="dob" size="30"></li>
+</ul>
+
+<ul>
+    <li>Branch</li>
+    <li><select name="Course" id="course">
+    <option value="-1" selected>select..</option>
+    <option value="civil">CIVIL</option>
+    <option value="electrical">ELECTRICAL</option>
+    <option value="mechanical">MECHANICAL</option>
+    <option value="computer">COMPUTER SCIENCE</option>
+    </select></li>
+    </ul>
+
+    <ul>
+        <li>Year</li>
+        <li><select name="year" id="year">
+        <option value="-1" selected>select..</option>
+        <option value="1st Year">1st Year</option>
+        <option value="2nd Year">2nd Year</option>
+        <option value="3rd Year">3rd Year</option>
+        <option value="4th Year ">4th Year</option>
+        </select></li>
+        </ul>
+
+    <div id="field"></div>
+
+
+<ul>
+    <li>Upload Photo<input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg"></li>
+</ul>
+
+<ul>
+<li colspan="2"><input type="reset"><button id="preview">Preview</button><button id="myBtn">Add Field</button></li>
+</ul>
+
+
+
+
+</div>
+
+<br>
+    
+    
+<div id="pre">
+    
+
+    <div id="column1">
+
+        <center><font size=4><b>California University</b></font></center>
+
+        <br>
+
+
+        <table id="myTable"  cellspacing="0" cellpadding="10" style="text-align: center;">
+            <tr>
+                <th>Name: </th>
+                <td><span id="name"></span></td>
+                <th rowspan="3"><div id="display-image" style="align-items: right;"></div></th>
+                
+            </tr>
+            <tr>
+                <th>Date of Birth:</th>
+                <td><span id="dob1"></span></td>
+            </tr>
+            <tr>
+                <th>Class:</th>
+                <td><span id="class"></span></td>
+            </tr>
+            <div id="tab"></div>
+            
+        </table>
+
+    </div>
+
+    
+
+
+    
+
+</div>
+
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <table cellpadding="10" style="text-align: center;">
+          <tr>
+              <th>Field Label:</th>
+              <td><input type="text" id="modName"></td>
+          </tr>
+          <tr>
+              <td>Field Type:</td>
+              <td>
+          <select name="type" id="type">
+          <option value="-1" selected>select..</option>
+          <option value="Number">Number</option>
+          <option value="Text">Text</option>
+          <option value="Date">Date</option>
+          </select>
+          </td>
+          </tr>
+      </table>
+
+      <button id="add" style="background-color: green;">Add</button>
+      <button id="cancel" style="background-color: red;">Cancel</button>
+
+
+    </div>
+  
+  </div>
+  
+
+<script src="form.js" ></script>
+</body>
+</html>
+
+/******************************JS************************************/
+let n = '';
+document.getElementById('textname').addEventListener('keydown',(e)=>
+{
+    n = n +e.key;
+    document.getElementById('name').innerText =document.getElementById('textname').value;
+
+    if(e.key = 'Backspace')
+    {
+        document.getElementById('name').innerText =document.getElementById('textname').value;
+    }
+})
+
+document.getElementById('dob').addEventListener('change',()=>
+{
+    document.getElementById('dob1').innerText = document.getElementById('dob').value;
+})
+
+
+let cls ='';
+
+document.getElementById('course').addEventListener('change',()=>
+{
+    if(document.getElementById('course').value != '-1')
+    {
+        cls = document.getElementById('course').value;
+    }
+})
+document.getElementById('year').addEventListener('change',()=>
+{
+    if(document.getElementById('year').value != '-1')
+    {
+        document.getElementById('class').innerText = cls+' '+document.getElementById('year').value;
+    }
+})
+
+const image_input = document.querySelector("#image-input");
+image_input.addEventListener("change", function() {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    const uploaded_image = reader.result;
+    document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+  });
+  reader.readAsDataURL(this.files[0]);
+});
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+
+document.getElementById('myBtn').addEventListener('click',()=>
+{
+    modal.style.display = "block";   
+})
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+document.getElementById('cancel').addEventListener('click',()=>
+{
+    modal.style.display = "none";
+})
+
+let i=0;
+let k =0;
+let index = 3;
+
+
+var table = document.getElementById('myTable');
+
+let row;
+
+var x =1;
+
+let count = 0;
+
+
+
+
+let arr = [];
+    let q=0;
+    let r=1;
+
+    document.getElementById('add').addEventListener('click',()=>
+{
+    q=0;
+    r=1;
+    arr = [];
+    
+    
+    ++i;
+    ++k;
+    let label = document.getElementById('modName').value;
+    let type = document.getElementById('type').value;
+    let id = label+i;
+
+    
+
+    if(type != '-1' && x==1)
+    {
+        document.getElementById('field').innerHTML =`<ul><li>${label}</li><li><input type=${type} onkeypress="fun()" id="${id}"></li></ul>`;
+        ++x;
+    }
+    else if(type != '-1')
+    {
+        document.getElementById('field').innerHTML =document.getElementById('field').innerHTML+`<ul><li>${label}</li><li><input type=${type} onkeypress="fun()" id="${id}"></li></ul>`;
+    }
+   
+    if(count %2 ==0)
+    {
+        row =table.insertRow(index++);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = `<b>${label}:</b>`;
+        cell2.innerHTML = `<span id="${id+k}"></span>`;
+        
+    }
+    else
+    {
+        var cell1 = row.insertCell(2);
+        var cell2 = row.insertCell(3);
+        cell1.innerHTML = `<b>${label}:</b>`;
+        cell2.innerHTML = `<span id="${id+k}"></span>`;
+    }
+
+    arr.push(`${id+k}`);
+    arr.push(`${id}`);
+    
+    
+    
+
+    modal.style.display = "none";
+
+    count=count+1;
+
+    console.log(count);
+    console.log(arr);
+
+   
+})
+
+const fun =()=>
+{
+    document.getElementById(`${arr[q]}`).innerText = document.getElementById(`${arr[r]}`).value;
+    
+}
+
+
+
+
+/*****************************APEX************************************/
+
+@RestResource(urlMapping = '/opp/*')
+global class CreateOppAPI 
+{
+	@HTTPGET
+    global static void createLead()
+    {
+        
+        String strOppId = '';
+        RestRequest restReq = RestContext.request;
+        RestResponse restRes = RestContext.response;
+        String strAccId = restReq.params.get('Id');
+        
+        Opportunity op = new Opportunity();
+        String k=op.getOpportunity(strAccId);
+        
+        RestContext.response.addHeader('Content-Type', 'application/json');
+        RestContext.response.responseBody = Blob.valueOf(k); 
+        
+        
+        
+    }
+}
+
+/***************************************/
+public class Account {
+
+    
+
+    public List<Schema.FieldSetMember> getFields() 
+    {
+        return SObjectType.Account.FieldSets.Account.getFields();
+    }
+
+    public sObject getAccount(String s) 
+    {
+        String query = 'SELECT ';
+        for(Schema.FieldSetMember f : this.getFields()) 
+        {
+            query += f.getFieldPath() + ', ';
+       	}
+        query += 'ID FROM Account WHERE id =\'' + s + '\'  LIMIT 1';
+        
+        List<sObject> li = Database.query(query);
+        
+        return li[0];
+    }
+}
+
+/***************************************************/
+public class Opportunity {
+
+    
+
+    public List<Schema.FieldSetMember> getFields() 
+    {
+        return SObjectType.Opportunity.FieldSets.Opportunity.getFields();
+    }
+
+    public String getOpportunity(Id s)
+    {
+        String query = 'SELECT ';
+        for(Schema.FieldSetMember f : this.getFields()) 
+        {
+            query += f.getFieldPath() + ', ';
+       	}
+        query += 'ID,OwnerID FROM Opportunity WHERE id =\'' + s + '\'  LIMIT 1';
+        
+        
+        List<sObject> opMain = Database.query(query);
+        
+        
+        Map<String,Object> mp = (Map<String,Object>)JSON.deserializeUntyped(JSON.serialize(opMain[0]));
+        
+        String accId = (String)mp.get('AccountId');
+        
+        System.debug(accID);
+        
+        String con = 'Select id from Contact  WHERE AccountId =\'' + accId +'\'';
+        
+        List<sObject> conList = Database.query(con);
+        
+        integer conListSize = conList.size();
+        
+        List<sObject> so = new List<sObject>();
+        
+        
+        System.debug(so);
+        
+        
+        
+        
+        
+        String ownId = (String)mp.get('OwnerId');
+		Owner onr = new Owner();
+        sObject soo = onr.getOwner(ownId);
+
+		Map<String,Object> mp4 = (Map<String,Object>)JSON.deserializeUntyped(JSON.serialize(soo));        
+        
+        System.debug(mp);
+        
+        Account ac = new Account();
+        sObject acc = ac.getAccount(accId);
+        
+        Map<String,Object> mp2 = (Map<String,Object>)JSON.deserializeUntyped(JSON.serialize(acc));
+        
+        System.debug(mp2);
+        
+        Set<String> st = mp.keySet();
+        Set<String> st2 = mp2.keySet();
+
+        Set<String> st4 = mp4.keySet();
+        
+		String oppInfo = JSON.serializePretty(opMain[0]);
+        String accInfo = JSON.serializePretty(acc);
+        String conInfo = JSON.serializePretty(so);
+        String owrInfo = JSON.serializePretty(soo);
+        
+        
+        
+        
+        
+        
+        JSONGenerator gen2 = JSON.createGenerator(true);
+        gen2.writeStartObject();
+        gen2.writeFieldName('Opportunity');
+        gen2.writeStartArray();
+        gen2.writeStartObject();
+        for(String sMap:st)
+        {
+            
+             if(sMap != 'attributes')
+             {
+                  gen2.writeObjectField(sMap, mp.get(sMap));
+             }
+        }
+        
+        gen2.writeFieldName('Owner');
+        gen2.writeStartArray();
+        gen2.writeStartObject();
+        for(String sMap4:st4)
+        {
+            
+             if(sMap4 != 'attributes' && sMap4 != 'Profile')
+             {
+                  gen2.writeObjectField(sMap4, mp4.get(sMap4));
+             }
+        }
+        gen2.writeFieldName('Account');
+        gen2.writeStartArray();
+        gen2.writeStartObject();
+        for(String sMap2:st2)
+        {
+            
+             if(sMap2 != 'attributes')
+             {
+                  gen2.writeObjectField(sMap2, mp2.get(sMap2));
+             }
+        }
+        gen2.writeFieldName('Contact');
+        gen2.writeStartArray();
+        gen2.writeStartObject();
+        
+        
+        for(integer i=0;i<conListSize;i++)
+        {
+            Contact ct = new Contact();
+            sobject sct = ct.getContact(conList[i].id);
+            Map<String,Object> mp3 = (Map<String,Object>)JSON.deserializeUntyped(JSON.serialize(sct));
+            Set<String> st3 = mp3.keySet();
+            gen2.writeFieldName('Contact'+i);
+            gen2.writeStartArray();
+            gen2.writeStartObject();
+            for(String sMap3:st3)
+        		{
+                     if(sMap3 != 'attributes')
+                     {
+                          gen2.writeObjectField(sMap3, mp3.get(sMap3));
+                     }
+        		}
+             
+        }
+        
+        gen2.writeEndObject();
+        gen2.writeEndArray();
+    	gen2.writeEndObject();
+        
+        String jsonStr = gen2.getAsString();
+        
+        
+		  System.debug(mp4);
+        String x= oppInfo+accInfo+conInfo+owrInfo;
+        
+        return jsonStr;
+
+
+		
+    }
+}
+
+/******************************************/
+public class Contact {
+
+    
+
+    public List<Schema.FieldSetMember> getFields() 
+    {
+        return SObjectType.Contact.FieldSets.Contact.getFields();
+    }
+
+    public sObject getContact(Id s) 
+    {
+        String query = 'SELECT ';
+        for(Schema.FieldSetMember f : this.getFields()) 
+        {
+            query += f.getFieldPath() + ', ';
+       	}
+        query += 'ID FROM Contact WHERE Id =\'' + s + '\'  LIMIT 1';
+        
+        List<sObject> li = Database.query(query);
+        
+        return li[0];
+    }
+}
+
+/*************************************************/
+public class Owner {
+
+    
+
+    public List<Schema.FieldSetMember> getFields() 
+    {
+        return SObjectType.User.FieldSets.Owner.getFields();
+    }
+
+    public sObject getOwner(String s) 
+    {
+        String query = 'SELECT ';
+        for(Schema.FieldSetMember f : this.getFields()) 
+        {
+            query += f.getFieldPath() + ', ';
+       	}
+        query += 'ID FROM User WHERE id =\'' + s + '\'  LIMIT 1';
+        
+        List<sObject> li = Database.query(query);
+        
+        return li[0];
+    }
+}
