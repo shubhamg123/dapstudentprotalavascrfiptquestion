@@ -41,21 +41,27 @@ margin-left: 100px;
 }
 #popup{
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top:25%;
+  left:25%;
+  width:50%;
+  opacity: 0.9;
+z-index: 2;
 
 
 
 }
 .popup{
-
-    display: flex;
+   display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 80px;
-
+    position: relative;
+    top:50%;
+    opacity: 0.7;
+  z-index: 2;
 
 
 }
